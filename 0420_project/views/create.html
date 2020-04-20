@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WEB - Create</title>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/statics/style.css">
+</head>
+<body>
+    <div id="head">
+        <h1><a href="/{0}/login">Welcome {0}!</a></h1>
+    </div>
+    <div id="container">
+        <div id="menu">
+            <h3>List</h3>
+            <ol>
+                {2}
+            </ol>
+        </div>
+        <div id = "content">
+            <h2>Create</h2>
+            <form action="/{0}/create" method="POST">
+            <p><input type="text" name="title" placeholder="title"></p>
+            <p><textarea name="desc" placeholder="description"></textarea></p>
+            <button type="submit">제출</button>
+    </form>
+        </div>
+    </div>
+    <div id="footer">
+				김유진/이성현
+        </div>
+    {1}
+    
+</body>
+</html>

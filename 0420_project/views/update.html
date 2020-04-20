@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WEB - Update</title>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/statics/style.css">
+</head>
+<body>
+    <div id="head">
+        <h1><a href="/{0}/login">Welcome {0}!</a></h1>
+    </div>
+    <div id="container">
+		<div id="menu">
+            <h3>List</h3>
+            <ol>
+                {1}
+            </ol>
+        </div>     
+        <div id = "content">
+            <h2>Update_{2}</h2>
+            {3}
+        </div>
+    </div>    
+    <div id = lower>    
+    <form action="/{0}/update/{2}" method="POST">
+        <p><input type="text" name="title" placeholder="title"></p>
+        <p><textarea name="desc" placeholder="update"></textarea></p>
+        <button type="submit">수정</button>
+    </form>
+        </div>
+    <div id="footer">
+				김유진/이성현
+        </div>
+
+</body>
+</html>
