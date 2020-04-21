@@ -70,17 +70,18 @@ def search(name):
 @app.route("/<name>/result", methods=['GET', 'POST'])
 def result(name):
     template = get_template('result.html')
-    tmp_id = []
+    tmp_id = {}
     keyword = request.args.get('keyword','')
     button = f'''<button type="button" onclick="location.href='/{name}/search' ">검색어수정</button><br>'''
     list_id = [n['id'] for n in members]
     list_cont = [{"id":i, "title": os.listdir(f'content/{i}')} for i in list_id]
     for i in list_cont:
-        if keyword in str(i['title']):
-            tmp_id.append(i['id'])
-    return template.format(keyword, ', '.join(tmp_id), button)
+        for j in i['title']:
+            if keyword in j:
+                tmp_id[i["id"]] = j
+    return template.format(keyword, tmp_id , button)
 
-            
+
 @app.route("/<name>/create", methods=['GET', 'POST'])
 def create(name):
     template = get_template('create.html')
