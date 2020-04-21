@@ -38,7 +38,7 @@ def index(name):
     template = get_template('template.html')
     content = ''
     button = f'''
-    <button type="button" onclick="location.href='/search' ">검색</button><br>
+    <button type="button" onclick="location.href='/{name}/search' ">검색</button><br>
     <button type="button" onclick="location.href='/{name}/create' ">추가</button><br>
     <button type="button" onclick="location.href='/login' ">로그아웃</button>'''
     return template.format(name,name,content,get_menu(name),button)
@@ -59,25 +59,26 @@ def html(name,title):
 def favicon():
     return abort(404)
 
-@app.route("/search", methods=['GET', 'POST']) 
-def search():
-    template = get_template('search.html')
+@app.route("/<name>/search", methods=['GET', 'POST']) 
+def search(name):
+    template = get_template('search.html').format(name)
     if request.method == 'GET':
         return template + 'GET'
     elif request.method == 'POST':
-        return redirect("/result"+"?keyword=" + request.form['keyword']) 
+        return redirect(f"/{name}/result?keyword={request.form['keyword']}") 
     
-@app.route("/result", methods=['GET', 'POST'])
-def result():
+@app.route("/<name>/result", methods=['GET', 'POST'])
+def result(name):
     template = get_template('result.html')
     tmp_id = []
     keyword = request.args.get('keyword','')
+    button = f'''<button type="button" onclick="location.href='/{name}/search' ">검색어수정</button><br>'''
     list_id = [n['id'] for n in members]
     list_cont = [{"id":i, "title": os.listdir(f'content/{i}')} for i in list_id]
     for i in list_cont:
         if keyword in i['title']:
             tmp_id.append(i['id'])
-    return template.format(keyword, ', '.join(tmp_id))
+    return template.format(keyword, ', '.join(tmp_id), button)
 
             
 @app.route("/<name>/create", methods=['GET', 'POST'])
