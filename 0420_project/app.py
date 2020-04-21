@@ -76,7 +76,7 @@ def result(name):
     list_id = [n['id'] for n in members]
     list_cont = [{"id":i, "title": os.listdir(f'content/{i}')} for i in list_id]
     for i in list_cont:
-        if keyword in i['title']:
+        if keyword in str(i['title']):
             tmp_id.append(i['id'])
     return template.format(keyword, ', '.join(tmp_id), button)
 
